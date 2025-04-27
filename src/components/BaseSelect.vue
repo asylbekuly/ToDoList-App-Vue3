@@ -1,0 +1,26 @@
+<script setup>
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+defineProps(['options', 'placeholder', 'selected'])
+</script>
+
+
+<template>
+  <div class="flex items-center gap-2">
+    <BaseButton>
+      <XMarkIcon class="h-8" />
+    </BaseButton>
+    <select
+      class="w-full rounded border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+    >
+      <option selected disabled value="">{{ placeholder }}</option>
+      <option
+        v-for="option in options"
+        :key="option.value"
+        :value="option.value"
+        :selected="option.value === selected"
+      >
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+</template>
