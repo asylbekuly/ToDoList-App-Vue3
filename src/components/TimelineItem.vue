@@ -1,7 +1,7 @@
 <script setup>
 import BaseSelect from './BaseSelect.vue'
 import { computed, ref } from 'vue'
-import { isUndefinedOrNull } from '@/validators'
+import { isUndefinedOrNull, validateActivitySelectOptions } from '@/validators'
 import TimelineHour from './TimelineHour.vue'
 
 const props = defineProps({
@@ -9,19 +9,14 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-})
+  activitySelectOptions: {
+    type: Array,
+    required: true,
+    validator: validateActivitySelectOptions,
+  },
+});
 
-const options = [
-  { value: 2, label: 'Work' },
-  { value: 3, label: 'Exercise' },
-  { value: 4, label: 'Study' },
-  { value: 5, label: 'Relax' },
-  { value: 6, label: 'Play' },
-  { value: 7, label: 'Eat' },
-  { value: 8, label: 'Sleep' },
-]
-
-const selectedActivityId = ref()
+const selectedActivityId = ref(0)
 const isNotSelected = computed(() => isUndefinedOrNull(selectedActivityId.value))
 </script>
 
@@ -30,7 +25,7 @@ const isNotSelected = computed(() => isUndefinedOrNull(selectedActivityId.value)
     <TimelineHour :hour="props.timelineItem.hour" />
     <BaseSelect
       :selected="selectedActivityId"
-      :options="options"
+      :options="activitySelectOptions"
       placeholder="Rest"
       @select="selectedActivityId = $event"
     />

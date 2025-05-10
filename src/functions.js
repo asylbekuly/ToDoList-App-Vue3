@@ -6,3 +6,7 @@ export function generateTimelineItems() {
     }
     return timelineItems
   }
+
+export function genereateActivitySelectOptions(activities){
+  return activities.map((label,value) => ({label,value}))
+}

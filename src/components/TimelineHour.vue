@@ -1,6 +1,5 @@
 <script setup>
 import { isValidHour } from '@/validators'
-import { computed } from 'vue'
 
 const props = defineProps({
   hour: {
