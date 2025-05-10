@@ -1,22 +1,15 @@
 <script setup>
 import BaseSelect from './BaseSelect.vue'
 import { computed, ref } from 'vue'
-import { isTimelineItemValid, isUndefinedOrNull } from '@/validators'
+import { isUndefinedOrNull } from '@/validators'
+import TimelineHour from './TimelineHour.vue'
 
 const props = defineProps({
   timelineItem: {
     type: Object,
     required: true,
-    validator: isTimelineItemValid,
   },
 })
-
-const hourLinkClasses = [
-  'absolute -top-4 left-1/2 -translate-x-1/2 rounded px-2 font-mono text-lg',
-  props.timelineItem.hour === new Date().getHours()
-    ? 'bg-purple-900 font-black text-white'
-    : 'bg-gray-100 text-gray-500',
-]
 
 const options = [
   { value: 2, label: 'Work' },
@@ -27,14 +20,14 @@ const options = [
   { value: 7, label: 'Eat' },
   { value: 8, label: 'Sleep' },
 ]
-const selectedActivityId = ref()
 
+const selectedActivityId = ref()
 const isNotSelected = computed(() => isUndefinedOrNull(selectedActivityId.value))
 </script>
- 
- <template>
+
+<template>
   <li class="relative flex flex-col gap-2 border-t border-gray-200 py-10 px-4">
-    <a href="#" :class="hourLinkClasses"> {{ props.timelineItem.hour }}:00 </a>
+    <TimelineHour :hour="props.timelineItem.hour" />
     <BaseSelect
       :selected="selectedActivityId"
       :options="options"
@@ -42,4 +35,4 @@ const isNotSelected = computed(() => isUndefinedOrNull(selectedActivityId.value)
       @select="selectedActivityId = $event"
     />
   </li>
-</template> 
+</template>
