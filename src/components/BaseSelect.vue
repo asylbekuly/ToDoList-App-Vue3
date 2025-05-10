@@ -1,16 +1,32 @@
 <script setup>
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-defineProps(['options', 'placeholder', 'selected'])
+import { validateSelectOptions,isNumberOrNull } from '@/validators'
+defineProps({
+  options: {
+    type: Array,
+    required: true,
+    validator: validateSelectOptions,
+  },
+  selected: Number,
+  placeholder: {
+    type: String,
+    default: 'Rest',
+  },
+})
+const emit = defineEmits({
+  select: isNumberOrNull
+})
 </script>
 
 
 <template>
   <div class="flex items-center gap-2">
     <BaseButton>
-      <XMarkIcon class="h-8" />
+      <XMarkIcon class="h-8 cursor-pointer" @click="emit('select', null)"/>
     </BaseButton>
     <select
       class="w-full rounded border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+      @change="emit('select', +$event.target.value)"
     >
       <option selected disabled value="">{{ placeholder }}</option>
       <option

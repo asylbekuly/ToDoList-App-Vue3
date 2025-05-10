@@ -1,14 +1,24 @@
 
 <script setup>
 import TimelineItem from '@/components/TimelineItem.vue'
-
-defineProps(['timelineItems'])
+import { validateTimelineItems } from '../validators';
+defineProps({
+  timelineItems: {
+    type: Array,
+    required: true,
+    validator: validateTimelineItems
+  },
+})
 </script>
 
 <template>
   <div class="mt-8">
     <ul>
-      <TimelineItem v-for=" timelineItem in timelineItems" :key="timelineItem.hour" :timeline-item="timelineItem" />
+      <TimelineItem
+        v-for="timelineItem in timelineItems"
+        :key="timelineItem.hour"
+        :timeline-item="timelineItem"
+      />
     </ul>
   </div>
 </template>

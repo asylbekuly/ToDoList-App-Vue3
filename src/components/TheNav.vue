@@ -1,9 +1,17 @@
 <script setup>
 import {nav_items} from '@/constants'
 import NavItem from './NavItem.vue'
-
-
-defineProps(['curntPage']); 
+import { isPageValid } from '../validators' 
+defineProps({
+  curntPage: {
+    type: String,
+    required: true,
+    validator: isPageValid
+  },
+})
+const emit = defineEmits({
+  navigate: isPageValid
+})
 </script>
 <template>
   <nav class="sticky bottom-0 z-10 bg-white">

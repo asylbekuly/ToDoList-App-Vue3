@@ -19,7 +19,7 @@ const timelineItems = generateTimelineItems()
 
 
 <template>
- <TheHeader  @go-to-timeline="goTo(PAGE_TIMELINE)" @go-to-progress="goTo(PAGE_PROGRESS)"/>
+ <TheHeader @navigate="curntPage = $event"/>
   <main class="">
     <TheTimeline v-show="curntPage===PAGE_TIMELINE" :timeline-items="timelineItems" />
     <TheActivities  v-show="curntPage===PAGE_ACTIVITIES"/>
