@@ -1,5 +1,7 @@
 <script setup>
+import BaseButton from '@/components/BaseButton.vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { BUTTON_TYPE_NEUTRAL } from '@/constants'
 import { validateSelectOptions,isNumberOrNull } from '@/validators'
 defineProps({
   options: {
@@ -21,7 +23,7 @@ const emit = defineEmits({
 
 <template>
   <div class="flex items-center gap-2">
-    <BaseButton>
+    <BaseButton :type="BUTTON_TYPE_NEUTRAL">
       <XMarkIcon class="h-8 cursor-pointer" @click="emit('select', null)"/>
     </BaseButton>
     <select
