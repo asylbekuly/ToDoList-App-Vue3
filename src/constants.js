@@ -12,19 +12,19 @@ export const nav_items = {
 
 export const PERIOD_SELECT_OPTIONS = [
   {
-    value: 15,
+    value: 15 * 60,
     label: '0:15',
   },
   {
-    value: 30,
+    value: 30 * 60,
     label: '0:30',
   },
   {
-    value: 45,
+    value: 45 * 60,
     label: '0:45',
   },
   {
-    value: 60,
+    value: 60 * 60,
     label: '1:00',
   },
 ]

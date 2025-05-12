@@ -20,7 +20,7 @@ const emit = defineEmits({
     delete: isUndefined
 })
 
-const SecondsToComplete = ref(null);
+const SecondsToComplete = ref(0);
 </script>
 <template>
   <li class="flex flex-col gap-2 p-4">

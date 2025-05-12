@@ -16,7 +16,7 @@ const props = defineProps({
   },
 });
 
-const selectedActivityId = ref(0)
+const selectedActivityId = ref(null)
 const isNotSelected = computed(() => isUndefinedOrNull(selectedActivityId.value))
 </script>
 

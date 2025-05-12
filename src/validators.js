@@ -23,6 +23,9 @@ export function isValidHour(hour){
 function isSelectOptionValid({value, label}) {
    return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label) 
 }
+export function isSelectValueValid(value){
+  return isNumberOrNull(value) || isNotEmptyString(value);
+}
 export function isNumberOrNull(value){
   return isNumber(value) || isNull(value);
 }
@@ -42,7 +45,7 @@ export function isActivitiesValid(activities){
 export function validateActivitySelectOptions(options){
   return options.every(isSelectOptionValid)
 }
-function isNull(value){
+export function isNull(value){
   return value === null;
 }
 
@@ -56,6 +59,6 @@ function isBetween(value,start,end){
 function isString(value){
   return typeof value === 'string';
 }
-function isNotEmptyString(value){
+export function isNotEmptyString(value){
   return isString(value) && value.length>0;
 }

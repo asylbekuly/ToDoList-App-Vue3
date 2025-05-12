@@ -1,25 +1,16 @@
 import { HOURS_IN_DAY, MIDNIGHT_HOUR, SECONDS_IN_HOUR } from './constants.js'
+import { isNull } from './validators'
 
 export function genetateActivities() {
-  return [
-    {
-      id: id(),
-      name: 'Coding',
-      secondsToComplete: 0 * SECONDS_IN_HOUR,
-    },
-    {
-      id: id(),
-      name: 'Reading',
-      secondsToComplete: 1 * SECONDS_IN_HOUR,
-    },
-    {
-      id: id(),
-      name: 'Writing',
-      secondsToComplete: 2 * SECONDS_IN_HOUR,
-    },
-  ]
+  return ['Coding', 'Reading', 'Writing'].map((name,hours) => ({
+    id: id(),
+    name,
+    secondsToComplete: hours * SECONDS_IN_HOUR,
+  }))
 }
-
+export function normalizeSelectValue(value){
+  return isNaN(value) || isNull(value) ? value : +value
+}
 export function generateTimelineItems() {
   const timelineItems = []
   for (let hour = MIDNIGHT_HOUR; hour < HOURS_IN_DAY; hour++) {

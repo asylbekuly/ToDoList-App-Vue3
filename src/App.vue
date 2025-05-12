@@ -4,26 +4,24 @@ import TheNav from './components/TheNav.vue';
 import TheActivities from './pages/TheActivities.vue';
 import TheProgress from './pages/TheProgress.vue';
 import TheTimeline from './pages/TheTimeline.vue';
-import { generateTimelineItems, genereateActivitySelectOptions, genetateActivities, id } from '@/functions'
+import { generateTimelineItems, genereateActivitySelectOptions, genetateActivities } from '@/functions'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
 
 
 const activities = ref(genetateActivities())
 const timelineItems = generateTimelineItems()
-const activitySelectOptions = genereateActivitySelectOptions(activities.value)
+const activitySelectOptions = computed(() =>
+  genereateActivitySelectOptions(activities.value)
+)
 
 function deleteActivity(activity){
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
-function createActivity(name){
-  activities.value.push({
-    id: id(),
-    name,
-    secondsToComplete: 0,
-  })
+function createActivity(activity){
+  activities.value.push(activity)
 }
 </script>
 
