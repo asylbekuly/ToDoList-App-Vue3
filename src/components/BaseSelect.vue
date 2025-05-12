@@ -10,17 +10,17 @@ defineProps({
     required: true,
     validator: validateSelectOptions,
   },
-  selected: [String, Number],
+  selected: [String, Number, null],
   placeholder: {
     type: String,
     default: 'Rest',
   },
 })
 const emit = defineEmits({
-  select: isSelectValueValid
+  select: isSelectValueValid,
 })
-function select(value){
-  emit('select',normalizeSelectValue(value))
+function select(value) {
+  emit('select', normalizeSelectValue(value))
 }
 </script>
 
@@ -28,7 +28,7 @@ function select(value){
 <template>
   <div class="flex items-center gap-2">
     <BaseButton :type="BUTTON_TYPE_NEUTRAL">
-      <XMarkIcon class="h-8 cursor-pointer" @click="select(null)"/>
+      <XMarkIcon class="h-8 cursor-pointer" @click="select(null)" />
     </BaseButton>
     <select
       class="w-full rounded border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"

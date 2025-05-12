@@ -3,6 +3,7 @@ export const PAGE_TIMELINE = 'timeline';
 export const PAGE_ACTIVITIES = 'activities';
 export const PAGE_PROGRESS = 'progress';     
 export const HOURS_IN_DAY = 24;
+export const SECONDS_IN_HOUR  = 3600;
 export const MIDNIGHT_HOUR = 0;
 export const nav_items = {
     [PAGE_TIMELINE]: ClockIcon,
@@ -12,23 +13,19 @@ export const nav_items = {
 
 export const PERIOD_SELECT_OPTIONS = [
   {
-    value: 15 * 60,
-    label: '0:15',
+    value: 1 * SECONDS_IN_HOUR,
+    label: '01:00',
   },
   {
-    value: 30 * 60,
-    label: '0:30',
+    value: 2 * SECONDS_IN_HOUR,
+    label: '02:00',
   },
   {
-    value: 45 * 60,
-    label: '0:45',
-  },
-  {
-    value: 60 * 60,
-    label: '1:00',
+    value: 3 * SECONDS_IN_HOUR,
+    label: '03:00',
   },
 ]
-export const SECONDS_IN_HOUR  = 3600;
+
 export const BUTTON_TYPE_DANGER = 'danger'
 export const BUTTON_TYPE_NEUTRAL = 'neutral'
 export const BUTTON_TYPE_PRIMARY = 'primary'

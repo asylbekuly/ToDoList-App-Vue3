@@ -29,13 +29,17 @@ export function isSelectValueValid(value){
 export function isNumberOrNull(value){
   return isNumber(value) || isNull(value);
 }
-export function isActivityValid({id, name, secondsToComplete}){
-  return [
-    isNotEmptyString(id),
-    isNotEmptyString(name),
-    isNumber(secondsToComplete),
-  ].every(Boolean)
+export function isActivityValid(activity) {
+  if (!activity || typeof activity !== 'object') return false;
+
+  const { id, name, secondsToComplete } = activity;
+  return (
+    isNotEmptyString(id) &&
+    isNotEmptyString(name) &&
+    isNumber(secondsToComplete)
+  );
 }
+
 export function isUndefined(value){
   return value === undefined;
 }
@@ -49,14 +53,14 @@ export function isNull(value){
   return value === null;
 }
 
-function isNumber(value){
+export function isNumber(value){
   return typeof value === 'number';
 }
 function isBetween(value,start,end){
   return value >= start && value <= end
 }
 
-function isString(value){
+export function isString(value){
   return typeof value === 'string';
 }
 export function isNotEmptyString(value){
