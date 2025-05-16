@@ -29,15 +29,16 @@ export function isSelectValueValid(value){
 export function isNumberOrNull(value){
   return isNumber(value) || isNull(value);
 }
-export function isActivityValid(activity) {
-  if (!activity || typeof activity !== 'object') return false;
+export function isActivityValid({ id, name, secondsToComplete }) {
+  if (isNull(id)) {
+    return true
+  }
 
-  const { id, name, secondsToComplete } = activity;
-  return (
-    isNotEmptyString(id) &&
-    isNotEmptyString(name) &&
-    isNumber(secondsToComplete)
-  );
+  return [
+    isNotEmptyString(id),
+    isNotEmptyString(name),
+    isNumber(secondsToComplete),
+  ].every(Boolean)
 }
 
 export function isUndefined(value){
