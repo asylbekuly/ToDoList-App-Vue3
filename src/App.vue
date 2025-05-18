@@ -17,6 +17,16 @@ const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
 const activities = ref(genetateActivities())
 const timelineItems = ref(generateTimelineItems(activities.value))
 const activitySelectOptions = computed(() => genereateActivitySelectOptions(activities.value))
+const timeline = ref()
+function goTo(page){
+  if(curntPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE){
+    timeline.value.scrollToHour()
+  }
+  if(page !== PAGE_TIMELINE){
+    document.body.scrollIntoView({ behavior: 'smooth' })
+  }
+  curntPage.value = page
+}
 
 function createActivity(activity) {
   activities.value.push(activity)
@@ -40,7 +50,7 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
 </script>
 
 <template>
-  <TheHeader @navigate="curntPage = $event" />
+  <TheHeader @navigate="goTo($event)" />
   <main class="">
     <TheTimeline
       v-show="curntPage === PAGE_TIMELINE"
@@ -48,6 +58,8 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
       :activities="activities"
       :activity-select-options="activitySelectOptions"
       @set-timeline-item-activity="setTimelineItemActivity"
+      :current-page="curntPage"
+      ref="timeline"
     />
 
     <TheActivities
@@ -59,5 +71,5 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
     />
     <TheProgress v-show="curntPage === PAGE_PROGRESS" />
   </main>
-  <TheNav :curntPage="curntPage" @navigate="curntPage = $event" />
+  <TheNav :curntPage="curntPage" @navigate="goTo($event)" />
 </template>
