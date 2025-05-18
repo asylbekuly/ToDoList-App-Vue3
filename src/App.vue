@@ -15,7 +15,7 @@ import { ref, computed } from 'vue'
 const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
 
 const activities = ref(genetateActivities())
-const timelineItems = ref(generateTimelineItems())
+const timelineItems = ref(generateTimelineItems(activities.value))
 const activitySelectOptions = computed(() => genereateActivitySelectOptions(activities.value))
 
 function createActivity(activity) {
@@ -23,7 +23,10 @@ function createActivity(activity) {
 }
 function deleteActivity(activity) {
   timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) timelineItem.activityId = null
+    if (timelineItem.activityId === activity.id) {
+      timelineItem.activityId = null
+      timelineItem.activitySeconds = 0
+    }
   })
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
