@@ -10,8 +10,9 @@ import {
   genetateActivities,
 } from '@/functions'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
-import { ref, computed } from 'vue'
+import { ref, computed, provide } from 'vue'
 
+provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
 const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
 
 const activities = ref(genetateActivities())
@@ -44,9 +45,13 @@ function deleteActivity(activity) {
 function setTimelineItemActivity({ timelineItem, activity }) {
   timelineItem.activityId = activity.id
 }
+function updateTimelineItemActivitySeconds(timelineItem,activitySeconds){
+  timelineItem.activitySeconds += activitySeconds
+}
 function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
+
 </script>
 
 <template>
@@ -65,6 +70,7 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
     <TheActivities
       v-show="curntPage === PAGE_ACTIVITIES"
       :activities="activities"
+      :timeline-items="timelineItems"
       @delete-activity="deleteActivity"
       @create-activity="createActivity"
       @set-activity-seconds-to-complete="setActivitySecondsToComplete"
