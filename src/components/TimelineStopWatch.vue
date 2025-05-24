@@ -7,7 +7,7 @@ import {
   BUTTON_TYPE_WARNING,
   MILLISECONDS_IN_SECOND,
 } from '@/constants'
-import { isNumber, isTimelineItemValid } from '@/validators'
+import {  isTimelineItemValid } from '@/validators'
 import { ref, inject } from 'vue'
 import { formatSeconds } from '@/functions'
 
