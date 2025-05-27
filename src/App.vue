@@ -12,22 +12,11 @@ import {
 } from '@/functions'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
 import { ref, computed, provide } from 'vue'
-
-const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
+import {curntPage, navigate, timelineRef} from './router'
 
 const activities = ref(genetateActivities())
 const timelineItems = ref(generateTimelineItems(activities.value))
 const activitySelectOptions = computed(() => genereateActivitySelectOptions(activities.value))
-const timeline = ref()
-function goTo(page) {
-  if (curntPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timeline.value.scrollToHour()
-  }
-  if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView({ behavior: 'smooth' })
-  }
-  curntPage.value = page
-}
 
 function createActivity(activity) {
   activities.value.push(activity)
@@ -63,17 +52,17 @@ provide('activities', activities.value)
 </script>
 
 <template>
-  <TheHeader @navigate="goTo($event)" />
+  <TheHeader @navigate="navigate($event)" />
   <main class="">
     <TheTimeline
       v-show="curntPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :current-page="curntPage"
-      ref="timeline"
+      ref="timelineRef"
     />
 
     <TheActivities v-show="curntPage === PAGE_ACTIVITIES" :activities="activities" />
     <TheProgress v-show="curntPage === PAGE_PROGRESS" />
   </main>
-  <TheNav :curntPage="curntPage" @navigate="goTo($event)" />
+  <TheNav :curntPage="curntPage" @navigate="navigate($event)" />
 </template>
