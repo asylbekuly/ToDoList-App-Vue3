@@ -2,8 +2,6 @@
 import TimelineItem from '@/components/TimelineItem.vue'
 import {
   validateTimelineItems,
-  isTimelineItemValid,
-  isActivityValid,
   isPageValid,
 } from '../validators'
 import { nextTick, ref, watchPostEffect } from 'vue'
@@ -18,11 +16,6 @@ const props = defineProps({
     type: String,
     required: true,
     validator: isPageValid,
-  },
-})
-const emit = defineEmits({
-  setTimelineItemActivity({ timelineItem, activity }) {
-    return [isTimelineItemValid(timelineItem), isActivityValid(activity)].every(Boolean)
   },
 })
 defineExpose({
@@ -57,7 +50,6 @@ function scrollToHour(hour = null ) {
         :key="timelineItem.hour"
         :timeline-item="timelineItem"
         ref="timelineItemRefs"
-        @select-activity="emit('setTimelineItemActivity', { timelineItem, activity: $event })"
         @scroll-to-hour="scrollToHour"
       />
     </ul>

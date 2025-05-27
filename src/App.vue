@@ -13,18 +13,17 @@ import {
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
 import { ref, computed, provide } from 'vue'
 
-
 const curntPage = ref(window.location.hash.replace('#', '') || PAGE_TIMELINE)
 
 const activities = ref(genetateActivities())
 const timelineItems = ref(generateTimelineItems(activities.value))
 const activitySelectOptions = computed(() => genereateActivitySelectOptions(activities.value))
 const timeline = ref()
-function goTo(page){
-  if(curntPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE){
+function goTo(page) {
+  if (curntPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
     timeline.value.scrollToHour()
   }
-  if(page !== PAGE_TIMELINE){
+  if (page !== PAGE_TIMELINE) {
     document.body.scrollIntoView({ behavior: 'smooth' })
   }
   curntPage.value = page
@@ -43,21 +42,24 @@ function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function setTimelineItemActivity({ timelineItem, activity }) {
-  timelineItem.activityId = activity.id
+function setTimelineItemActivity({ timelineItem, activityId }) {
+  timelineItem.activityId = activityId
 }
-function updateTimelineItemActivitySeconds(timelineItem,activitySeconds){
+function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
   timelineItem.activitySeconds += activitySeconds
 }
 function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
-provide('activitySelectOptions',activitySelectOptions.value)
-provide('PeriodSelectOptions',generatePeriodSelectOptions())
+provide('setTimelineItemActivity', setTimelineItemActivity)
+provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
+provide('createActivity', createActivity)
+provide('deleteActivity', deleteActivity)
+provide('activitySelectOptions', activitySelectOptions.value)
+provide('PeriodSelectOptions', generatePeriodSelectOptions())
 provide('timelineItems', timelineItems.value)
 provide('activities', activities.value)
-
 </script>
 
 <template>
@@ -66,18 +68,11 @@ provide('activities', activities.value)
     <TheTimeline
       v-show="curntPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      @set-timeline-item-activity="setTimelineItemActivity"
       :current-page="curntPage"
       ref="timeline"
     />
 
-    <TheActivities
-      v-show="curntPage === PAGE_ACTIVITIES"
-      :activities="activities"
-      @delete-activity="deleteActivity"
-      @create-activity="createActivity"
-      @set-activity-seconds-to-complete="setActivitySecondsToComplete"
-    />
+    <TheActivities v-show="curntPage === PAGE_ACTIVITIES" :activities="activities" />
     <TheProgress v-show="curntPage === PAGE_PROGRESS" />
   </main>
   <TheNav :curntPage="curntPage" @navigate="goTo($event)" />
