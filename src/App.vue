@@ -11,8 +11,9 @@ import {
   generatePeriodSelectOptions,
 } from '@/functions'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
-import { ref, computed, provide } from 'vue'
-import {curntPage, navigate, timelineRef} from './router'
+import { ref, computed, provide, readonly } from 'vue'
+import { curntPage, timelineRef } from './router'
+import * as keys from './keys'
 
 const activities = ref(genetateActivities())
 const timelineItems = ref(generateTimelineItems(activities.value))
@@ -31,38 +32,38 @@ function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function setTimelineItemActivity({ timelineItem, activityId }) {
+function setTimelineItemActivity(timelineItem, activityId) {
   timelineItem.activityId = activityId
 }
+
 function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
   timelineItem.activitySeconds += activitySeconds
 }
+
 function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete
 }
-provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
-provide('setTimelineItemActivity', setTimelineItemActivity)
-provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
-provide('createActivity', createActivity)
-provide('deleteActivity', deleteActivity)
-provide('activitySelectOptions', activitySelectOptions.value)
-provide('PeriodSelectOptions', generatePeriodSelectOptions())
-provide('timelineItems', timelineItems.value)
-provide('activities', activities.value)
+provide(keys.updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds)
+provide(keys.setActivitySecondsToCompleteKey, setActivitySecondsToComplete)
+provide(keys.setTimelineItemActivityKey, setTimelineItemActivity)
+provide(keys.createActivityKey, createActivity)
+provide(keys.deleteActivityKey, deleteActivity)
+provide(keys.activitySelectOptionsKey, readonly(activitySelectOptions.value))
+provide(keys.periodSelectOptionsKey, readonly(generatePeriodSelectOptions()))
+provide(keys.timelineItemsKey, readonly(timelineItems.value))
 </script>
 
 <template>
-  <TheHeader @navigate="navigate($event)" />
+  <TheHeader />
   <main class="">
     <TheTimeline
       v-show="curntPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      :current-page="curntPage"
       ref="timelineRef"
     />
 
     <TheActivities v-show="curntPage === PAGE_ACTIVITIES" :activities="activities" />
     <TheProgress v-show="curntPage === PAGE_PROGRESS" />
   </main>
-  <TheNav :curntPage="curntPage" @navigate="navigate($event)" />
+  <TheNav />
 </template>

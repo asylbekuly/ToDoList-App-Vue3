@@ -4,9 +4,8 @@ import {
   SECONDS_IN_MINUTE,
   MINUTES_IN_HOUR,
   MILLISECONDS_IN_SECOND,
-  PAGE_TIMELINE,
 } from './constants.js'
-import { isNull, isPageValid } from './validators'
+import { isNull } from './validators'
 
 export function genetateActivities() {
   return ['Coding', 'Reading', 'Writing'].map((name, hours) => ({
@@ -15,17 +14,7 @@ export function genetateActivities() {
     secondsToComplete: hours * SECONDS_IN_HOUR,
   }))
 }
-export function normalizePageHash() {
-  const page = window.location.hash.slice(1)
 
-  if (isPageValid(page)) {
-    return page
-  }
-
-  window.location.hash = PAGE_TIMELINE
-
-  return PAGE_TIMELINE
-}
 export function generateTimelineItems(activities) {
   return [...Array(HOURS_IN_DAY).keys()].map((hour) => ({
     hour,
@@ -45,7 +34,7 @@ export function generatePeriodSelectOptions() {
   const periodsInMinutes = [
     15, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480,
   ]
-  return periodsInMinutes.map((periodInMinutes) => ({
+  return periodsInMinutes.map((periodInMinutes) => ({ 
     value: periodInMinutes * SECONDS_IN_MINUTE,
     label: generatePeriodSelectOptionsLabel(periodInMinutes),
   }))

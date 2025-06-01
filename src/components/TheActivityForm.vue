@@ -5,7 +5,8 @@ import { PlusIcon } from '@heroicons/vue/24/outline'
 import { nextTick, ref, inject } from 'vue'
 import { BUTTON_TYPE_PRIMARY } from '@/constants'
 import { id } from '@/functions'
-const createActivity = inject('createActivity')
+import { createActivityKey } from '@/keys'
+const createActivity = inject(createActivityKey)
 const name = ref('')
 
 async function submit() {

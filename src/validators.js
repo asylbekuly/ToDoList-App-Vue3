@@ -1,7 +1,10 @@
-import { MIDNIGHT_HOUR, nav_items,HOURS_IN_DAY,BUTTON_TYPES } from './constants'
+import { MIDNIGHT_HOUR,HOURS_IN_DAY,BUTTON_TYPES, NAV_ITEMS } from './constants'
 export function isPageValid(page) {
-  return Object.keys(nav_items).includes(page)
+  return NAV_ITEMS.some(navItem => navItem.page === page)
 }
+export function isNavItemValid(navItem) {
+  return NAV_ITEMS.includes(navItem) && isPageValid(navItem.page)
+} 
 export function isButtonTypeValid(type) {
   return BUTTON_TYPES.includes(type)
 }
