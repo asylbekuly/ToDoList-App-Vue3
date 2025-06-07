@@ -39,7 +39,7 @@ const PeriodSelectOptions = inject(periodSelectOptionsKey)
         placeholder="h:mm"
         :selected="activity.secondsToComplete || null"
         :options="PeriodSelectOptions"
-        @select="setActivitySecondsToComplete(activity, $event || 0)"
+        @select="setActivitySecondsToComplete(activity, $event)"
       />
       <ActivitySecondsToComplete
         v-if="activity.secondsToComplete"

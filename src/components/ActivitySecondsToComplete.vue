@@ -16,7 +16,7 @@ const timelineItems = inject(timelineItemsKey)
 
 const secondsDiff = computed(
   () =>
-    getTotalActivitySeconds(props.activity, timelineItems) - props.activity.secondsToComplete
+    getTotalActivitySeconds(props.activity, timelineItems.value) - props.activity.secondsToComplete
 )
 const colorClasses = computed(() =>
   secondsDiff.value < 0 ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'

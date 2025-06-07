@@ -9,7 +9,7 @@ import {
 } from '@/constants'
 import {  isTimelineItemValid } from '@/validators'
 import { ref, inject } from 'vue'
-import { formatSeconds } from '@/functions'
+import { currentHour, formatSeconds } from '@/functions'
 import { updateTimelineItemActivitySecondsKey } from '@/keys'
 
 const props = defineProps({
@@ -46,7 +46,7 @@ function reset() {
   updateTimelineItemActivitySeconds(props.timelineItem, -seconds.value)
   seconds.value = 0
 }
-const isStartButtonDisabled = props.timelineItem.hour !== new Date().getHours()
+const isStartButtonDisabled = props.timelineItem.hour !== currentHour()
 </script>
 <template>
   <div class="flex w-full items-center gap-2">
