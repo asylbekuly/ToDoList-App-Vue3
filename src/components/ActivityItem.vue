@@ -2,15 +2,11 @@
 import BaseButton from '@/components/BaseButton.vue'
 import BaseSelect from '@/components/BaseSelect.vue'
 import { TrashIcon } from '@heroicons/vue/24/outline'
-import {  BUTTON_TYPE_DANGER } from '@/constants'
+import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '@/constants'
 import { isActivityValid } from '@/validators'
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue'
-import { inject } from 'vue'
-import {
-  setActivitySecondsToCompleteKey,
-  deleteActivityKey,
-  periodSelectOptionsKey,
-} from '@/keys'
+import { setActivitySecondsToComplete, deleteActivity } from '@/activities'
+import { resetTimelineItemActivities } from '@/timeline-items'
 
 defineProps({
   activity: {
@@ -20,15 +16,15 @@ defineProps({
   },
 })
 
-
-const setActivitySecondsToComplete = inject(setActivitySecondsToCompleteKey)
-const deleteActivity = inject(deleteActivityKey)
-const PeriodSelectOptions = inject(periodSelectOptionsKey)
+function deleteAndresetActivity(activity) {
+  resetTimelineItemActivities(activity)
+  deleteActivity(activity)
+}
 </script>
 <template>
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-3">
-      <BaseButton :type="BUTTON_TYPE_DANGER" @click="deleteActivity(activity)">
+      <BaseButton :type="BUTTON_TYPE_DANGER" @click="deleteAndresetActivity(activity)">
         <TrashIcon class="h-8 cursor-pointer" />
       </BaseButton>
       <span class="truncate text-xl">{{ activity.name }}</span>
@@ -38,13 +34,10 @@ const PeriodSelectOptions = inject(periodSelectOptionsKey)
         class="font-mono text-2xl grow"
         placeholder="h:mm"
         :selected="activity.secondsToComplete || null"
-        :options="PeriodSelectOptions"
+        :options="PERIOD_SELECT_OPTIONS"
         @select="setActivitySecondsToComplete(activity, $event)"
       />
-      <ActivitySecondsToComplete
-        v-if="activity.secondsToComplete"
-        :activity="activity"
-      />
+      <ActivitySecondsToComplete v-if="activity.secondsToComplete" :activity="activity" />
     </div>
   </li>
 </template>
