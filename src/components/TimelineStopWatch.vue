@@ -10,7 +10,7 @@ import {
 import { isTimelineItemValid } from '@/validators'
 import { ref, watch } from 'vue'
 import { currentHour, formatSeconds } from '@/functions'
-import { updateTimelineItemActivitySeconds } from '@/timeline-items'
+import { updateTimelineItem } from '@/timeline-items'
 const props = defineProps({
   timelineItem: {
     type: Object,
@@ -25,7 +25,7 @@ let interval = null
 watch(
   () => props.timelineItem.activityId,
   () => {
-    updateTimelineItemActivitySeconds(props.timelineItem, seconds.value)
+    updateTimelineItem(props.timelineItem, {activitySeconds: seconds.value})
   },
 )
 
@@ -33,7 +33,7 @@ function start() {
   if (!isRunning.value) {
     isRunning.value = true
     interval = setInterval(() => {
-      updateTimelineItemActivitySeconds(props.timelineItem, props.timelineItem.activitySeconds + 1)
+      updateTimelineItem(props.timelineItem, {activitySeconds: props.timelineItem.activitySeconds + 1})
       seconds.value++
     }, MILLISECONDS_IN_SECOND)
   }
@@ -46,9 +46,9 @@ function stop() {
 
 function reset() {
   stop()
-  updateTimelineItemActivitySeconds(
+  updateTimelineItem(
     props.timelineItem,
-    props.timelineItem.activitySecond - seconds.value,
+    {updateTimelineItem: props.timelineItem.activitySecond - seconds.value},
   )
   seconds.value = 0
 }
