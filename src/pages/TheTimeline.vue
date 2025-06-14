@@ -1,17 +1,10 @@
 <script setup>
 import TimelineItem from '@/components/TimelineItem.vue'
-import { nextTick, watchPostEffect } from 'vue'
-import { PAGE_TIMELINE } from '@/constants'
-import { curntPage } from '@/router'
-import { scrollToCurrentHour,timelineItems,timelineItemRefs} from '@/timeline-items'
-watchPostEffect(async () => {
-  if (curntPage.value === PAGE_TIMELINE) {
-    await nextTick()
-    scrollToCurrentHour(false)
-  }
-})
+import { onActivated } from 'vue'
 
+import { scrollToCurrentHour, timelineItems, timelineItemRefs } from '@/timeline-items'
 
+onActivated(scrollToCurrentHour)
 </script>
 
 <template>

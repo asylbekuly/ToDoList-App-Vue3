@@ -1,21 +1,15 @@
 <script setup>
 import TheHeader from './components/TheHeader.vue'
 import TheNav from './components/TheNav.vue'
-import TheActivities from './pages/TheActivities.vue'
-import TheProgress from './pages/TheProgress.vue'
-import TheTimeline from './pages/TheTimeline.vue'
-import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
-import { curntPage } from './router'
-
-
+import { routes, curntPage } from './router'
 </script>
 
 <template>
   <TheHeader />
   <main class="">
-    <TheTimeline v-show="curntPage === PAGE_TIMELINE"/>
-    <TheActivities v-show="curntPage === PAGE_ACTIVITIES" />
-    <TheProgress v-show="curntPage === PAGE_PROGRESS" />
+    <KeepAlive>
+      <component :is="routes[curntPage]" />
+    </KeepAlive>
   </main>
   <TheNav />
 </template>

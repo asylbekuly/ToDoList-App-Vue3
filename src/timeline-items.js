@@ -27,7 +27,7 @@ export function getTotalActivitySeconds(activity) {
       0,
     )
 }
-export function scrollToCurrentHour(isSmooth = true) {
+export function scrollToCurrentHour(isSmooth = false) {
   scrollToHour(currentHour(), isSmooth)
 }
 export function scrollToHour(hour) {

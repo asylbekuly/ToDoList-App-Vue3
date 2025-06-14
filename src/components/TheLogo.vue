@@ -4,7 +4,7 @@ import { curntPage, navigate } from '@/router'
 import { scrollToCurrentHour } from '@/timeline-items'
 
 function handleClick(){
-  curntPage.value === PAGE_TIMELINE ? scrollToCurrentHour() : navigate(PAGE_TIMELINE);
+  curntPage.value === PAGE_TIMELINE ? scrollToCurrentHour(true) : navigate(PAGE_TIMELINE);
 }
 </script>
 
