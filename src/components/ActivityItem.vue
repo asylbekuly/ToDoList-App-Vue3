@@ -5,7 +5,7 @@ import { TrashIcon } from '@heroicons/vue/24/outline'
 import { BUTTON_TYPE_DANGER, PERIOD_SELECT_OPTIONS } from '@/constants'
 import { isActivityValid } from '@/validators'
 import ActivitySecondsToComplete from './ActivitySecondsToComplete.vue'
-import { setActivitySecondsToComplete, deleteActivity } from '@/activities'
+import { updateActivity, deleteActivity } from '@/activities'
 import { resetTimelineItemActivities } from '@/timeline-items'
 
 defineProps({
@@ -35,7 +35,7 @@ function deleteAndresetActivity(activity) {
         placeholder="h:mm"
         :selected="activity.secondsToComplete || null"
         :options="PERIOD_SELECT_OPTIONS"
-        @select="setActivitySecondsToComplete(activity, $event)"
+        @select="updateActivity(activity, {secondsToComplete: $event || 0})"
       />
       <ActivitySecondsToComplete v-if="activity.secondsToComplete" :activity="activity" />
     </div>

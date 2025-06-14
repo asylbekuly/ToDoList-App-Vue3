@@ -5,7 +5,7 @@ import TheActivities from './pages/TheActivities.vue'
 import TheProgress from './pages/TheProgress.vue'
 import TheTimeline from './pages/TheTimeline.vue'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
-import { curntPage, timelineRef } from './router'
+import { curntPage } from './router'
 
 
 </script>
@@ -13,7 +13,7 @@ import { curntPage, timelineRef } from './router'
 <template>
   <TheHeader />
   <main class="">
-    <TheTimeline v-show="curntPage === PAGE_TIMELINE" ref="timelineRef" />
+    <TheTimeline v-show="curntPage === PAGE_TIMELINE"/>
     <TheActivities v-show="curntPage === PAGE_ACTIVITIES" />
     <TheProgress v-show="curntPage === PAGE_PROGRESS" />
   </main>

@@ -4,12 +4,8 @@ import { PAGE_TIMELINE } from '@/constants'
 
 export const curntPage = ref(normalizePageHash())
 export function navigate(page) {
-  if (curntPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timelineRef.value.scrollToHour()
-  }
-  else if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView({ behavior: 'smooth' })
-  }
+  document.body.scrollIntoView({ behavior: 'smooth' })
+
   curntPage.value = page
 }
 export function normalizePageHash() {
@@ -23,4 +19,3 @@ export function normalizePageHash() {
 
   return PAGE_TIMELINE
 }
-export const timelineRef = ref()
