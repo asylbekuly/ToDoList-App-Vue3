@@ -7,8 +7,8 @@ import {
   BUTTON_TYPE_WARNING,
   MILLISECONDS_IN_SECOND,
 } from '@/constants'
-import {  isTimelineItemValid } from '@/validators'
-import { ref } from 'vue'
+import { isTimelineItemValid } from '@/validators'
+import { ref, watch } from 'vue'
 import { currentHour, formatSeconds } from '@/functions'
 import { updateTimelineItemActivitySeconds } from '@/timeline-items'
 const props = defineProps({
@@ -19,16 +19,21 @@ const props = defineProps({
   },
 })
 
- 
 const seconds = ref(props.timelineItem.activitySeconds)
 const isRunning = ref(false)
 let interval = null
+watch(
+  () => props.timelineItem.activityId,
+  () => {
+    updateTimelineItemActivitySeconds(props.timelineItem, seconds.value)
+  },
+)
 
 function start() {
   if (!isRunning.value) {
     isRunning.value = true
     interval = setInterval(() => {
-      updateTimelineItemActivitySeconds(props.timelineItem, 1)
+      updateTimelineItemActivitySeconds(props.timelineItem, props.timelineItem.activitySeconds + 1)
       seconds.value++
     }, MILLISECONDS_IN_SECOND)
   }
@@ -41,7 +46,10 @@ function stop() {
 
 function reset() {
   stop()
-  updateTimelineItemActivitySeconds(props.timelineItem, -seconds.value)
+  updateTimelineItemActivitySeconds(
+    props.timelineItem,
+    props.timelineItem.activitySecond - seconds.value,
+  )
   seconds.value = 0
 }
 const isStartButtonDisabled = props.timelineItem.hour !== currentHour()
