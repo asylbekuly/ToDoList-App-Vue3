@@ -7,9 +7,9 @@ import { navigate } from '@/router'
 
 <template>
   <a :href="`#${PAGE_PROGRESS}`" @click="navigate(PAGE_PROGRESS)"  class="text-sm">
-    <div v-if="false" class="flex items-center gap-1">
+    <div v-if="true" class="flex items-center gap-1">
       Day complete!
-      <BaseIcon :name="ICON_CHECK_CIRCLE" class="h-7 w-7 text-green-500" />
+      <BaseIcon :name="ICON_CHECK_CIRCLE" classes="h-7 w-7 text-green-500" />
     </div>
     <div v-else class="flex items-center gap-1">
       <div>Progress: <span class="font-mono">20%</span></div>

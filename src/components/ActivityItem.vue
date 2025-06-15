@@ -26,7 +26,7 @@ function deleteAndresetActivity(activity) {
   <li class="flex flex-col gap-2 p-4">
     <div class="flex items-center gap-3">
       <BaseButton :type="BUTTON_TYPE_DANGER" @click="deleteAndresetActivity(activity)">
-        <BaseIcon :name="ICON_TRASH" class="h-8 cursor-pointer" />
+        <BaseIcon :name="ICON_TRASH" />
       </BaseButton>
       <span class="truncate text-xl">{{ activity.name }}</span>
     </div>

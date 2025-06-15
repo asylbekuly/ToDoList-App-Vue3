@@ -31,7 +31,7 @@ async function submit() {
       class="border rounded w-full p-2 text-xl"
     />
     <BaseButton :type="BUTTON_TYPE_PRIMARY">
-      <BaseIcon :name="ICON_PLUS" class="h-8 cursor-pointer" />
+      <BaseIcon :name="ICON_PLUS"  />
     </BaseButton>
   </form>
 </template>
