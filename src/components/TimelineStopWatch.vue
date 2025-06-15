@@ -1,6 +1,6 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
-import { ArrowPathIcon, PauseIcon, PlayIcon } from '@heroicons/vue/24/outline'
+import BaseIcon from './BaseIcon.vue'
 import {
   BUTTON_TYPE_DANGER,
   BUTTON_TYPE_SUCCESS,
@@ -57,16 +57,16 @@ const isStartButtonDisabled = props.timelineItem.hour !== currentHour()
 <template>
   <div class="flex w-full items-center gap-2">
     <BaseButton :type="BUTTON_TYPE_DANGER" :disabled="!seconds" @click="reset">
-      <ArrowPathIcon class="h-8 cursor-pointer" />
+      <BaseIcon name="ArrowPath" class="h-8 cursor-pointer" />
     </BaseButton>
     <div class="flex flex-grow items-center rounded bg-gray-100 px-2 font-mono text-2xl">
       {{ formatSeconds(seconds) }}
     </div>
     <BaseButton v-if="isRunning" :type="BUTTON_TYPE_WARNING" @click="stop">
-      <PauseIcon class="h-8 cursor-pointer" />
+      <BaseIcon name="Pause" class="h-8 cursor-pointer" />
     </BaseButton>
     <BaseButton v-else :type="BUTTON_TYPE_SUCCESS" :disabled="isStartButtonDisabled" @click="start">
-      <PlayIcon class="h-8 cursor-pointer" />
+      <BaseIcon name="Play" class="h-8 cursor-pointer" />
     </BaseButton>
   </div>
 </template>
