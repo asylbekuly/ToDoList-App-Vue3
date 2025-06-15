@@ -2,6 +2,7 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
+import { ICON_PLUS } from '@/icons'
 import { nextTick, ref } from 'vue'
 import { BUTTON_TYPE_PRIMARY } from '@/constants'
 import { id } from '@/functions'
@@ -30,7 +31,7 @@ async function submit() {
       class="border rounded w-full p-2 text-xl"
     />
     <BaseButton :type="BUTTON_TYPE_PRIMARY">
-      <BaseIcon name="Plus" class="h-8 cursor-pointer" />
+      <BaseIcon :name="ICON_PLUS" class="h-8 cursor-pointer" />
     </BaseButton>
   </form>
 </template>
