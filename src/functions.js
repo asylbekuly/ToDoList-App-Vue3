@@ -1,4 +1,11 @@
-import { SECONDS_IN_MINUTE, MINUTES_IN_HOUR, MILLISECONDS_IN_SECOND } from './constants.js'
+import {
+  SECONDS_IN_MINUTE,
+  MINUTES_IN_HOUR,
+  MILLISECONDS_IN_SECOND,
+  hundred_percent,
+  low_percent,
+  medium_percent,
+} from './constants.js'
 import { isNull } from './validators'
 
 export function generatePeriodSelectOptions() {
@@ -30,4 +37,10 @@ export function formatSeconds(seconds) {
   date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
   const utc = date.toUTCString()
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
+}
+export function getProgressColorClass(percentage) {
+  if (percentage < low_percent) return 'bg-red-500'
+  if (percentage < medium_percent) return 'bg-yellow-500'
+  if (percentage < hundred_percent) return 'bg-blue-500'
+  return 'bg-green-500'
 }

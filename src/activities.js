@@ -1,10 +1,9 @@
-import { SECONDS_IN_HOUR } from './constants'
 import { id } from './functions'
 import { ref, computed } from 'vue'
-
+import { getTotalActivitySeconds } from '@/timeline-items'
 export const activities = ref(generateActivities())
 export const trackedActivities = computed(() =>
-  activities.value.filter(({secondsToComplete}) => secondsToComplete),
+  activities.value.filter(({ secondsToComplete }) => secondsToComplete),
 )
 export const activitySelectOptions = computed(() =>
   genereateActivitySelectOptions(activities.value),
@@ -18,12 +17,17 @@ export function createActivity(activity) {
 export function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
+export function getActivityProgress(activity) {
+  const activitySeconds = getTotalActivitySeconds(activity)
+  const percentage = (activitySeconds * 100) / activity.secondsToComplete
+  return Math.floor(percentage)
+}
 
 function generateActivities() {
-  return ['Coding', 'Reading', 'Writing'].map((name, hours) => ({
+  return ['Coding', 'Reading', 'Writing'].map((name) => ({
     id: id(),
     name,
-    secondsToComplete: hours * SECONDS_IN_HOUR,
+    secondsToComplete: 15 * 60,
   }))
 }
 function genereateActivitySelectOptions(activities) {
