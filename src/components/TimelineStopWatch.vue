@@ -38,7 +38,7 @@ function start() {
       updateTimelineItem(props.timelineItem, {
         activitySeconds: props.timelineItem.activitySeconds + temp,
       })
-      seconds.value++
+      seconds.value+= temp
     }, MILLISECONDS_IN_SECOND)
   }
 }
@@ -51,7 +51,7 @@ function stop() {
 function reset() {
   stop()
   updateTimelineItem(props.timelineItem, {
-    updateTimelineItem: props.timelineItem.activitySecond - seconds.value * temp, 
+    updateTimelineItem: props.timelineItem.activitySecond - seconds.value , 
   })
   seconds.value = 0
 }
