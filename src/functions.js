@@ -32,6 +32,9 @@ export function normalizeSelectValue(value) {
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2)
 }
+export function formatSecondsWithSign(seconds) {
+  return `${seconds < 0 ? '-' : '+'}${formatSeconds(seconds)}`
+}
 export function formatSeconds(seconds) {
   const date = new Date()
   date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECOND)
