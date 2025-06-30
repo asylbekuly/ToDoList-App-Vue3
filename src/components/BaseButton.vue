@@ -25,13 +25,14 @@ const props = defineProps({
     validator: isButtonTypeValid,
   },
 })
-const classes = `${
-  typeclasses[props.type]
-} cursor-pointer rounded focus:outline-none focus:ring focus:ring-amber-200 disabled:cursor-not-allowed disabled:opacity-50`
+const classes = [
+  'rounded p-3 disabled:cursor-not-allowed disabled:opacity-50',
+  typeclasses[props.type],
+]
 </script>
 
 <template>
   <button :class="classes" type="button">
-    <slot></slot>
+    <slot />
   </button>
 </template>
