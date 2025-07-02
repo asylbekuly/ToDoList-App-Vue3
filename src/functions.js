@@ -2,7 +2,7 @@ import {
   SECONDS_IN_MINUTE,
   MINUTES_IN_HOUR,
   MILLISECONDS_IN_SECOND,
-  hundred_percent,
+  HUNDRED_PERCENT,
   low_percent,
   medium_percent,
 } from './constants.js'
@@ -44,6 +44,6 @@ export function formatSeconds(seconds) {
 export function getProgressColorClass(percentage) {
   if (percentage < low_percent) return 'bg-red-500'
   if (percentage < medium_percent) return 'bg-yellow-500'
-  if (percentage < hundred_percent) return 'bg-blue-500'
+  if (percentage < HUNDRED_PERCENT) return 'bg-blue-500'
   return 'bg-green-500'
 }
