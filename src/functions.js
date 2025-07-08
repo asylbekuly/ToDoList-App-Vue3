@@ -17,13 +17,11 @@ export function generatePeriodSelectOptions() {
     label: generatePeriodSelectOptionsLabel(periodInMinutes),
   }))
 }
-export function currentHour() {
-  return new Date().getHours()
-}
+
 function generatePeriodSelectOptionsLabel(periodInMinutes) {
   const hours = Math.floor(periodInMinutes / MINUTES_IN_HOUR)
   const minutes = periodInMinutes % MINUTES_IN_HOUR
-  return `${hours}:${minutes.toString().padStart(2, '0')}`
+  return `${hours}:${minutes.toString().padStart(2, 0)}`
 }
 export function normalizeSelectValue(value) {
   return isNaN(value) || isNull(value) ? value : +value
