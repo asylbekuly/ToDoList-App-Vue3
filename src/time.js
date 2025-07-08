@@ -1,4 +1,4 @@
-import { HUNDRED_PERCENT, MILLISECONDS_IN_SECOND, SECONDS_IN_DAY } from '@/constants'
+import { HUNDRED_PERCENT, MILLISECONDS_IN_SECOND, SECONDS_IN_DAY, SECONDS_IN_MINUTE } from '@/constants'
 import { computed, ref } from 'vue'
 
 export const now = ref(new Date())
@@ -15,7 +15,7 @@ let timer = null
 export function startTimer() {
   now.value = new Date()
   timer = setInterval(() => {
-    now.value = new Date(now.value.getTime() + MILLISECONDS_IN_SECOND * 5 * 60)
+    now.value = new Date(now.value.getTime() + MILLISECONDS_IN_SECOND * SECONDS_IN_MINUTE)
   }, MILLISECONDS_IN_SECOND)
 }
 
