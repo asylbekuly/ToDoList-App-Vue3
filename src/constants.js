@@ -14,6 +14,7 @@ export const low_percent = 33
 export const medium_percent = 66
 export const HUNDRED_PERCENT = 100
 export const SECONDS_IN_DAY = HOURS_IN_DAY * SECONDS_IN_HOUR
+export const APP_NAME = 'ontrack'
 
 export const NAV_ITEMS = [
   {
