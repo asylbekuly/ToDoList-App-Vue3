@@ -19,7 +19,7 @@ const classes = computed(() => [
   'flex-col',
   'items-center',
   'p-7',
-  { 'bg-gray-100': props.navItem.page === curntPage.value },
+  props.navItem.page === curntPage.value ? 'bg-yellow-200' : 'hover:bg-yellow-100',
 ])
 
 function handleClick() {
