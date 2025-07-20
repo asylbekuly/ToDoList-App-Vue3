@@ -3,10 +3,11 @@ import { HOURS_IN_DAY, MIDNIGHT_HOUR, MILLISECONDS_IN_SECOND } from './constants
 import { now } from './time.js'
 export const timelineItems = ref(generateTimelineItems())
 export const timelineItemRefs = ref([])
-export const timelineItemTimer = ref(false)
 export const activeTimelineItem = computed(() =>
   timelineItems.value.find(({ isActive }) => isActive),
 )
+export const timelineItemTimer = ref(false)
+
 
 export function startTimelineItemTimer(timelineItem) {
   updateTimelineItem(timelineItem, { isActive: true })
