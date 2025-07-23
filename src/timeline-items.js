@@ -1,13 +1,13 @@
 import { computed, ref, watchEffect } from 'vue'
 import { HOURS_IN_DAY, MIDNIGHT_HOUR, MILLISECONDS_IN_SECOND } from './constants.js'
-import { now } from './time.js'
-export const timelineItems = ref(generateTimelineItems())
+import { isToday, toSeconds, today, now, EndOfHour } from './time.js'
+
+export const timelineItems = ref([])
 export const timelineItemRefs = ref([])
 export const activeTimelineItem = computed(() =>
   timelineItems.value.find(({ isActive }) => isActive),
 )
 export const timelineItemTimer = ref(false)
-
 
 export function startTimelineItemTimer(timelineItem) {
   updateTimelineItem(timelineItem, { isActive: true })
@@ -34,7 +34,17 @@ watchEffect(() => {
   }
 })
 
+export function initializeTimelineItems(state) {
+  const lastActiveAt = new Date(state.lastActiveAt)
 
+  timelineItems.value = state.timelineItems ?? generateTimelineItems()
+
+  if (activeTimelineItem.value && isToday(lastActiveAt)) {
+    syncIdleSeconds(lastActiveAt)
+  } else if (state.timelineItems && !isToday(lastActiveAt)) {
+    resetTimelineItems()
+  }
+}
 export function updateTimelineItem(timelineItem, fields) {
   return Object.assign(timelineItem, fields)
 }
@@ -52,6 +62,14 @@ export function calculateTrackedeActivitySeconds(timelineItems, activity) {
   return filterTimelineItemsByActivity(timelineItems, activity)
     .map(({ activitySeconds }) => activitySeconds)
     .reduce((total, seconds) => Math.round(total + seconds), 0)
+}
+function resetTimelineItems() {
+  timelineItems.value.forEach((timelineItem) =>
+    updateTimelineItem(timelineItem, {
+      activitySeconds: 0,
+      isActive: false,
+    }),
+  )
 }
 export function scrollToCurrentHour(isSmooth = false) {
   scrollToHour(now.value.getHours(), isSmooth)
@@ -73,4 +91,14 @@ function generateTimelineItems() {
     activitySeconds: 0, //[0, 1, 2, 3, 4].includes(hour) ? hour * 600 : 0,
     isActive: false,
   }))
+}
+function syncIdleSeconds(lastActiveAt) {
+  updateTimelineItem(activeTimelineItem.value, {
+    activitySeconds: activeTimelineItem.value.activitySeconds + calculateIdleSeconds(lastActiveAt),
+  })
+}
+function calculateIdleSeconds(lastActiveAt) {
+  return lastActiveAt.getHours() === today().getHours()
+    ? toSeconds(today() - lastActiveAt)
+    : toSeconds(EndOfHour(lastActiveAt) - lastActiveAt)
 }
