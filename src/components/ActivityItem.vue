@@ -36,7 +36,7 @@ function deleteAndresetActivity(activity) {
         placeholder="h:mm"
         :selected="activity.secondsToComplete || null"
         :options="PERIOD_SELECT_OPTIONS"
-        @select="updateActivity(activity, {secondsToComplete: $event || 0})"
+        @select="updateActivity(activity, { secondsToComplete: $event || 0 })"
       />
       <RemainingActivitySeconds v-if="activity.secondsToComplete" :activity="activity" />
     </div>

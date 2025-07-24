@@ -1,4 +1,3 @@
-
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
 import BaseIcon from '@/components/BaseIcon.vue'
@@ -31,7 +30,7 @@ async function submit() {
       class="border rounded w-full p-2 text-xl"
     />
     <BaseButton :type="BUTTON_TYPE_PRIMARY">
-      <BaseIcon :name="ICON_PLUS"  />
+      <BaseIcon :name="ICON_PLUS" />
     </BaseButton>
   </form>
 </template>

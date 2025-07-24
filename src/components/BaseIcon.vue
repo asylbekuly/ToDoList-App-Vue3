@@ -1,11 +1,11 @@
 <script setup>
-import { ICONS } from '@/icons';
-import { isIconValid, } from '@/validators';
+import { ICONS } from '@/icons'
+import { isIconValid } from '@/validators'
 defineProps({
   name: {
     type: String,
     required: true,
-    validator: isIconValid
+    validator: isIconValid,
   },
 })
 </script>

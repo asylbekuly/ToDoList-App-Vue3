@@ -1,5 +1,5 @@
 import { APP_NAME } from './constants.js'
-import {  tomorrow } from './time.js'
+import { tomorrow } from './time.js'
 import {
   activeTimelineItem,
   initializeTimelineItems,
@@ -12,13 +12,11 @@ import { activities, initializeActivities } from './activities.js'
 export function syncState(shouldLoad = true) {
   shouldLoad ? loadState() : saveState()
   if (activeTimelineItem.value) {
-    shouldLoad
-      ? startTimelineItemTimer()
-      : stopTimelineItemTimer()
+    shouldLoad ? startTimelineItemTimer() : stopTimelineItemTimer()
   }
 }
 
- function loadState() {
+function loadState() {
   const state = loadFromLocalStorage()
   initializeActivities(state)
   initializeTimelineItems(state)

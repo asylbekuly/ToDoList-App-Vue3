@@ -18,9 +18,7 @@ export function isTimelineItemValid({ hour }) {
 export function validateSelectOptions(options){
     return options.every(isSelectOptionValid)  
 }
-export function validateTimelineItems(timelineItems) {
-  return timelineItems.every(isTimelineItemValid)
-}
+
 export function isUndefinedOrNull(value){
   return isUndefined(value) || isNull(value);
 }

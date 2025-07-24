@@ -2,8 +2,7 @@
 import ActivityItem from '@/components/ActivityItem.vue'
 import TheActivitiesEmptyState from '@/components/TheActivitiesEmptyState.vue'
 import TheActivityForm from '@/components/TheActivityForm.vue'
-import {activities} from '@/activities'
-
+import { activities } from '@/activities'
 </script>
 
 <template>

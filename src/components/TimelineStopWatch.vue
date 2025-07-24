@@ -9,7 +9,7 @@ import { now } from '@/time'
 import {
   resetTimelineItemTimer,
   startTimelineItemTimer,
-  stopTimelineItemTimer, 
+  stopTimelineItemTimer,
 } from '@/timeline-item-timer'
 import { activeTimelineItem } from '@/timeline-items'
 defineProps({

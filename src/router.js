@@ -6,9 +6,9 @@ import TheTimeline from './pages/TheTimeline.vue'
 import { PAGE_TIMELINE, PAGE_ACTIVITIES, PAGE_PROGRESS } from '@/constants'
 
 export const routes = {
-  [PAGE_TIMELINE] : TheTimeline,
+  [PAGE_TIMELINE]: TheTimeline,
   [PAGE_ACTIVITIES]: TheActivities,
-  [PAGE_PROGRESS]: TheProgress
+  [PAGE_PROGRESS]: TheProgress,
 }
 
 export const curntPage = ref(normalizePageHash())

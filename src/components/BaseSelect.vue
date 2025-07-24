@@ -25,11 +25,10 @@ function select(value) {
 }
 </script>
 
-
 <template>
   <div class="flex items-center gap-2">
     <BaseButton :type="BUTTON_TYPE_NEUTRAL" @click="select(null)">
-      <BaseIcon :name="ICON_X_MARK"  />
+      <BaseIcon :name="ICON_X_MARK" />
     </BaseButton>
     <select
       class="w-full rounded border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
