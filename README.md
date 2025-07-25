@@ -1,35 +1,36 @@
-# vue-application
+# 📝 ToDoList App — Vue 3 + Vite
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple and elegant ToDo List application built with **Vue 3**, **Composition API**, and **Vite**. Manage your daily tasks easily and efficiently.
 
-## Recommended IDE Setup
+## 🚀 Features
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- ✅ Add, complete, and delete tasks
+- 🧠 Responsive and clean UI
+- 💾 LocalStorage support to save your tasks
+- ⚡️ Built with Vite for fast development
 
-## Customize configuration
+## 🖥️ Preview
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+![screenshot](./screenshot.png) <!-- Добавь файл скриншота в корень, если хочешь -->
 
-## Project Setup
+## 📦 Tech Stack
 
-```sh
+- [Vue 3](https://vuejs.org/)
+- [Vite](https://vitejs.dev/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+## ⚙️ Project Setup
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/asylbekuly/ToDoList-App-Vue3.git
+
+# 2. Move to project directory
+cd ToDoList-App-Vue3
+
+# 3. Install dependencies
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# 4. Run the app
 npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
