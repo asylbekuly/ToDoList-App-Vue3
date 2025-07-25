@@ -11,7 +11,9 @@ A simple and elegant ToDo List application built with **Vue 3**, **Composition A
 
 ## 🖥️ Preview
 
-![screenshot](./screenshot.png) <!-- Добавь файл скриншота в корень, если хочешь -->
+![screenshot](src/assets/image/timeline.png)
+![screenshot](src/assets/image/activities.png)
+![screenshot](src/assets/image/progress.png)
 
 ## 📦 Tech Stack
 
